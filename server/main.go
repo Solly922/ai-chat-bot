@@ -6,6 +6,7 @@ import (
 	"os"
 
 	"github.com/go-chi/chi"
+	"github.com/go-chi/chi/v5/middleware"
 	"github.com/go-chi/cors"
 	"github.com/joho/godotenv"
 )
@@ -28,6 +29,9 @@ func main() {
 		AllowCredentials: false,
 		MaxAge:           3000,
 	}))
+
+	router.Use(middleware.Logger)
+	router.Use(middleware.Recoverer)
 
 	v1Router := chi.NewRouter()
 
